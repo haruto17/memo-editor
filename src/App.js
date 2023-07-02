@@ -11,6 +11,18 @@ function App() {
     setContents("");
   };
 
+  const handleExport = () => {
+    const blob = new Blob([contents], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    document.body.appendChild(a);
+    a.download = title;
+    a.href = url;
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <>
       <Container size="md">
@@ -30,7 +42,9 @@ function App() {
         <Button onClick={handleDelete} leftIcon={<IconTrash />} color="red">
           Delete
         </Button>
-        <Button leftIcon={<IconFileExport />}>Export</Button>
+        <Button onClick={handleExport} leftIcon={<IconFileExport />}>
+          Export
+        </Button>
         <Button leftIcon={<IconFileImport />}>Import</Button>
       </Flex>
       ;
