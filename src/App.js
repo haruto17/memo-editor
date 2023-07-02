@@ -1,8 +1,7 @@
-import { Container, Textarea, Flex, Button } from "@mantine/core";
+import { Textarea, Flex, Button } from "@mantine/core";
 import { IconTrash, IconFileImport, IconFileExport } from "@tabler/icons-react";
 import "./App.css";
 import { useState } from "react";
-import { render } from "@testing-library/react";
 
 const TitleArea = (props) => {
   const handleTitleChange = (event) => {
@@ -23,14 +22,30 @@ const ContentsArea = (props) => {
 };
 
 function Control() {
+  const handleDelete = () => {
+    console.log("delete");
+  };
+
+  const handleExport = () => {
+    console.log("export");
+  };
+
+  const handleImport = () => {
+    console.log("import");
+  };
+
   return (
     <>
       <Flex gap="md" justify="center" align="center">
-        <Button leftIcon={<IconTrash />} color="red">
+        <Button onClick={handleDelete} leftIcon={<IconTrash />} color="red">
           Delete
         </Button>
-        <Button leftIcon={<IconFileExport />}>Export</Button>
-        <Button leftIcon={<IconFileImport />}>Import</Button>
+        <Button onClick={handleExport} leftIcon={<IconFileExport />}>
+          Export
+        </Button>
+        <Button onClick={handleImport} leftIcon={<IconFileImport />}>
+          Import
+        </Button>
       </Flex>
     </>
   );
