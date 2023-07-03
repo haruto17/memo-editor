@@ -69,7 +69,7 @@ function App() {
         <Button onClick={handleImport} leftIcon={<IconFileImport />}>
           Import
         </Button>
-        <input hidden ref={inputRef} type="file" onChange={onFileInputChange}></input>
+        <input hidden ref={inputRef} type="file" accept="text/plain" onChange={onFileInputChange}></input>
       </Flex>
       ;
     </>
