@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { Textarea, Button, Flex, Container } from "@mantine/core";
+import { Textarea, Button, Flex, Container, Title } from "@mantine/core";
 import { IconTrash, IconFileImport, IconFileExport } from "@tabler/icons-react";
 
 function App() {
@@ -43,6 +43,9 @@ function App() {
 
   return (
     <>
+      <Title order={1} ta={"center"} mt={"md"} sx={{ fontFamily: "Greycliff CF, sans-serif" }} color="blue">
+        Memo Editor
+      </Title>
       <Container size="md">
         <Textarea value={title} onChange={(event) => setTitle(event.target.value)} mt={"md"} mb={"md"} radius={"md"} placeholder="Title" />
         <Textarea
