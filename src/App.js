@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Textarea, Button, Flex, Container } from "@mantine/core";
 import { IconTrash, IconFileImport, IconFileExport } from "@tabler/icons-react";
 
 function App() {
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
+
+  const inputRef = useRef(null);
 
   const handleDelete = () => {
     setTitle("");
@@ -21,6 +23,21 @@ function App() {
     a.click();
     a.remove();
     URL.revokeObjectURL(url);
+  };
+
+  const handleImport = () => {
+    inputRef.current.click();
+  };
+
+  const onFileInputChange = (event) => {
+    const title = event.target.files[0].name;
+    const reader = new FileReader();
+    reader.onload = () => {
+      setTitle(title.replace(/\.[^/.]+$/, ""));
+      setContents(reader.result);
+      event.target.value = "";
+    };
+    reader.readAsText(event.target.files[0]);
   };
 
   return (
@@ -45,7 +62,10 @@ function App() {
         <Button onClick={handleExport} leftIcon={<IconFileExport />}>
           Export
         </Button>
-        <Button leftIcon={<IconFileImport />}>Import</Button>
+        <Button onClick={handleImport} leftIcon={<IconFileImport />}>
+          Import
+        </Button>
+        <input hidden ref={inputRef} type="file" onChange={onFileInputChange}></input>
       </Flex>
       ;
     </>
